@@ -97,9 +97,9 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # MySQL engine
-        'NAME': 'pricecheck_db',         # Database name
-        'USER': 'mikebun',              # Your MySQL username
-        'PASSWORD': 'your_password',          # Your MySQL password
+        'NAME': 'price_check_db',         # Database name
+        'USER': 'root',              # Your MySQL username
+        'PASSWORD': 'gerardi8',          # Your MySQL password
         'HOST': 'localhost',                  # Or the IP address of your MySQL server
         'PORT': '3306',                       # Default MySQL port
     }
