@@ -58,6 +58,11 @@ INSTALLED_APPS = [
     "api",
     "rest_framework",
     "corsheaders",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "rest_framework.authtoken",
 ]
 
 MIDDLEWARE = [
@@ -69,6 +74,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",
+    "allauth.account.middleware.AccountMiddleware"
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -99,7 +105,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',  # MySQL engine
         'NAME': 'price_check_db',         # Database name
         'USER': 'root',              # Your MySQL username
-        'PASSWORD': 'gerardi8',          # Your MySQL password
+        'PASSWORD': '',          # Your MySQL password
         'HOST': 'localhost',                  # Or the IP address of your MySQL server
         'PORT': '3306',                       # Default MySQL port
     }
@@ -147,5 +153,23 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOWS_CREDENTIALS = True
+
+AUTHENTICATION_BACKENDS = {
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+}
+
+LOGIN_RIDERECT_URL = '/callback/'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google' : {
+        'SCOPE': ['email', 'profile'],
+        'AUTH_PARAMS': {'access_type': 'online'},
+        'OAUTH_PKECE_ENABLED': True,
+        'FETCH_USERINFO': True,
+    }
+}
+
+SOCIALACCOUNT_STORE_TOKENS = True
